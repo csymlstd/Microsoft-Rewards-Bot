@@ -1,0 +1,9 @@
+version: '3'
+services:
+  bingrewards:
+    build: .
+    restart: always
+    command: python3 ms_rewards.py --headless --all --log-level INFO
+    volumes:
+      - './:/usr/src/app/'
+    
