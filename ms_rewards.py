@@ -80,7 +80,11 @@ def init_logging(log_level):
     os.makedirs('logs', exist_ok=True)
     log_path = os.path.join('logs', 'ms_rewards.log')
     logging.basicConfig(
-        filename=log_path,
+        # log to file and stdout
+        handlers=[
+            logging.FileHandler(log_path),
+            logging.StreamHandler()
+        ],
         level=log_level,
         format='%(asctime)s :: %(levelname)s :: %(name)s :: %(message)s')
 
@@ -262,7 +266,7 @@ def browser_setup(headless_mode, user_agent):
     if headless_mode:
         options.add_argument('--headless')
 
-    chrome_obj = webdriver.Chrome(path, options=options)
+    chrome_obj = webdriver.Chrome('/usr/bin/chromedriver', options=options)
 
     return chrome_obj
 
